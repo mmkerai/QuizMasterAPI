@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>QMaster</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.QMServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QMaster</servlet-name>
+		<url-pattern>/apiv1/qm/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>QMGame</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.GameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QMGame</servlet-name>
+		<url-pattern>/apiv1/qmgames/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>QMQuestion</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.QuestionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QMQuestion</servlet-name>
+		<url-pattern>/apiv1/qmquestions/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>QMContestant</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.ContestantServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QMContestant</servlet-name>
+		<url-pattern>/apiv1/qmcontestants/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LoadQuestions</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.LoadQuestionsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoadQuestions</servlet-name>
+		<url-pattern>/apiv1/loadquestions</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserAuthentication</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.TccOpenIDServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserAuthentication</servlet-name>
+		<url-pattern>/openidlogin</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>OauthCallback</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.OauthCallbackServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OauthCallback</servlet-name>
+		<url-pattern>/oauth2callback</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>QMApp</servlet-name>
+		<servlet-class>com.thecodecentre.quizmaster.UpdateAppServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QMApp</servlet-name>
+		<url-pattern>/updateapp</url-pattern>
+	</servlet-mapping>
+			
+	<welcome-file-list>
+		<welcome-file>quizmaster.jsp</welcome-file>
+	</welcome-file-list>	
+	<context-param>
+	    <param-name>org.mortbay.jetty.servlet.SessionURL</param-name>
+	    <param-value>none</param-value>
+	</context-param>
+<!-- 
+	 <security-constraint>
+		<web-resource-collection>
+		    <web-resource-name>LoadQuestions</web-resource-name>
+		    <url-pattern>/loadquestions/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+		    <role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint> -->	
+</web-app>

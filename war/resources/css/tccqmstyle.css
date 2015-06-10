@@ -1,0 +1,287 @@
+body	{
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 20px;
+	color: blue;
+	line-height: 28px;
+	margin: 10px;
+	padding: 10px;
+	text-align: center;
+	background-color: gray
+	}
+
+h1	{
+	font-size: 18px;
+	line-height: 22px;
+	color: black
+	}
+
+h2	{
+	font-size: 12px;
+	line-height: 14px;
+	color: black
+	}
+
+p	{
+	font-size: 16px;
+	line-height: 20px;
+	color: black
+	}
+
+a:link, a:visited	{
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: normal;
+	color: blue;
+	background-color: none;
+	}
+
+a:hover {color: purple}
+
+#wrapper {
+	width: 1024px;
+	margin: 0 auto;
+/*	text-align: left;*/
+	}
+	
+#header {
+	overflow:hidden;
+	width:100%;
+	height: 50px;
+	font-size: 20px;
+	line-height: 24px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: lightblue;
+/*	background-image:url("../images/tccheader1024.png");*/
+	}
+		
+#menu {
+	float:left;
+	width:99%;
+	margin: 2px;
+	}
+
+#main {
+	overflow:hidden;
+	width:100%;
+	min-height: 160px;
+	background-color: dimgray;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+/*	padding:20px;*/
+	}
+
+#right {
+	float: right;
+	min-width:220px;
+	width:30%;
+	min-height:200px;
+    background: #ffffff;
+	padding: 4px;
+	border-radius: 10px;
+	}
+
+#footer {
+	overflow:hidden;
+	width:100%;
+	text-align: center;
+	margin: 6px;
+	clear:left
+	}
+
+table#joingametable {
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 16px;
+	line-height: 16px;
+	font-weight: normal;
+	font-style: normal;
+	width: 50%;
+	text-align: center;
+	border: none;
+	color: black
+	}
+
+table#joingametable td {
+    font-size: 16px;
+	line-height: 28px;
+	font-weight: bold;
+	width: 50%;
+}
+
+table#joingametable td a:hover {
+	font-weight: bold;
+	color: purple;
+}
+
+table#gamestable {
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 14px;
+	line-height: 18px;
+    font-weight: bold;
+	color: black;
+	padding: 6px;
+	}
+	
+table#gamestable tr {
+	vertical-align: middle;
+	margin: 10px;
+	height: 40;
+	border: 10px
+	}
+
+table#gamestable td, th {
+    border: 1px solid green;
+	text-align: center;
+	padding: 6px;
+	}
+
+table#gamestable th {
+    background-color: green;
+    color: white;
+	}
+
+table#contestanttable {
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 14px;
+	line-height: 24px;
+    font-weight: bold;
+	color: black;
+	border-width: 1px;
+	padding: 6px;
+	}
+	
+table#contestanttable tr {
+	vertical-align: middle;
+	margin: 10px;
+	height: 40;
+	border: 10px
+	}
+
+table#contestanttable td, th {
+    border: 1px solid blue;
+	text-align: center;
+	padding: 6px;
+	}
+
+table#contestanttable th {
+    background-color: blue;
+    color: white;
+	}
+
+table#contestanttable tr:nth-child(odd)	{
+	background-color:#eee;
+	}
+table#contestanttable tr:nth-child(even) {
+	background-color:#fff; 
+	}
+
+#response {
+	float: left;
+    font-size: 12px;
+	line-height: 14px;
+    font-weight: normal;
+    background: white;
+	}
+
+#questioninfo {
+    font-size: 18px;
+	line-height: 24px;
+    font-weight: normal;
+    background: ghostwhite;
+	}
+	
+#answerinfo {
+    font-size: 16px;
+	line-height: 28px;
+    font-weight: normal;
+    background: khaki;
+	}
+	
+#response {
+    font-size: 16px;
+    color: red;
+	line-height: 28px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+	}
+	
+#games, #contestants {
+	overflow:hidden;
+	float:left;
+	width:100%;
+	min-height: 160px;
+	background-color: ghostwhite;
+	border-radius: 10px;
+	font-size: 12px;
+	line-height: 16px;
+    font-weight: bold;
+	}
+	
+#contestantinfo {
+	width:100%;
+	min-height: 100px;
+	background-color: ghostwhite;
+	border-radius: 10px;
+	}
+	
+table#formtable {
+	color: black;
+	border-width: 1px;
+	border-collapse: separate;
+	}
+	
+table#formtable tr {
+	vertical-align: middle;
+	margin: 10px;
+	}
+
+table#formtable td {
+	text-align: left;
+	}
+
+table#questiontable {
+    font-family: Verdana, Arial, Helvetica;
+    font-size: 12px;
+	line-height: 16px;
+    font-weight: bold;
+	color: black;
+	border-width: 0px;
+	padding: 5px;
+	}
+	
+table#questiontable tr {
+	vertical-align: middle;
+	margin: 10px;
+	height: 40;
+	border: 10px
+	}
+
+table#questiontable td, th {
+    border: 1px solid orange;
+	padding: 6px;
+	text-align: center;
+	}
+
+table#questiontable th {
+    background-color: orange;
+    color: white;
+	}
+
+table#questiontable tr:nth-child(odd) {
+	background-color:#eee;
+	}
+table#questiontable tr:nth-child(even) {
+	background-color:#fff; 
+	}
+
+.correct	{
+    background-color: red;
+	color: green
+}
+
+.incorrect	{
+    background-color: orange;
+	color: red
+}

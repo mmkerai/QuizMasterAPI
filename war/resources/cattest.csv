@@ -1,0 +1,10 @@
+Category,Subcategory,Difficulty,Question,Answer,Image
+Geography,Countries,EASY,Name this country,France#Spain#Belgium#Brazil,resources/countries/qm-countries-1.jpg
+Geography,Countries,EASY,Name this country,Spain in the spring,resources/countries/qm-countries-2.jpg
+Geography,Countries,EASY,Name this country,USA America,resources/countries/qm-countries-3.jpg
+Geography,Countries,EASY,Name this country,Australia,resources/countries/qm-countries-4.jpg
+Geography,Countries,EASY,Name this country,Italy,resources/countries/qm-countries-5.jpg
+MOVIES,ACTRESSES,EASY,Who is this Hollywood actress?,Keira Knightley,resources/actresses/qm-actresses-001.jpg
+MOVIES,ACTRESSES,EASY,Who is this Hollywood actress?,Meryl Streep,resources/actresses/qm-actresses-005.jpg
+MOVIES,MOVIESTARS,EASY,Name this Hollywood movie star,Meryl Streep,resources/moviestars/qm-moviestars-019.jpg
+MOVIES,MOVIESTARS,MEDIUM,Name this Hollywood movie star,Will Smith,resources/moviestars/qm-moviestars-020.jpg

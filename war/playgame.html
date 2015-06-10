@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TCC Quiz Master Play Game</title>
+   <link rel="stylesheet" type="text/css" href="resources/css/form.css" media="Screen" />
+    <link rel="stylesheet" type="text/css" href="resources/css/tccqmstyle.css" media="Screen" />
+	<script type="text/javascript" src="resources/tcc_qmutils.js"></script>
+	<script type="text/javascript" src="resources/tcc_mpg.js"></script>
+  </head>
+<body>
+<div id="wrapper">
+<div id="header">
+<h1 id="title">Play Game</h1>
+</div>
+<div id="response"></div>
+<div id="gamestatus"></div>
+<div id="questioninfo"></div>
+<div id="answerinfo"></div>
+<div id="contestantinfo"></div>
+<p></p>
+<form id="playgameform" method="POST" action="#">
+Answer: <input type='text' size='32' name='answer'/></form>
+<p><a href='#' onClick='SubmitAnswer()'>Submit answer</a></p>
+<p><a href='#' onClick='ShowResults()'>Show final results</a></p>
+<script>
+ContPlayGame();
+</script>
+</div>
+</body>
+</html>

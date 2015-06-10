@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Contestant</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/form.css" media="Screen" />
+    <link rel="stylesheet" type="text/css" href="resources/css/tccqmstyle.css" media="Screen" />
+	<script type="text/javascript" src="resources/tcc_qmutils.js"></script>
+	<script type="text/javascript" src="resources/tcc_mpg.js"></script>
+  </head>
+<body>
+<div id="header">
+<h1 id="title">Edit Contestant</h1>
+</div>
+<form id="contestantform" action="/qmgame" method="POST">
+<input type="hidden" name="contestantid"/>
+<table>
+<tr><td>Contestant Name</td><td><input type="text" name="contestantname"/></td></tr>
+<tr><td>Access Code</td><td><input type="text" name="qmaccesscode"/></td></tr>
+<tr><td>Contestant Email</td><td><input type="text" name="contestantemail"/></td></tr>
+<tr><td colspan="2"><a href='#' onClick='UpdateContestant()'>Update</a></td></tr>
+</table>
+</form>
+<div id="response"></div>
+<script>
+EditContestantPage();
+</script>
+<p><a href=# onClick='window.close()'>Close this window</a></p>
+</body>
+</html>

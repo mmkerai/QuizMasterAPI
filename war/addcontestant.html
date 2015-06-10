@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TCC Quiz Master Game - add contestant</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/form.css" media="Screen" />
+    <link rel="stylesheet" type="text/css" href="resources/css/tccqmstyle.css" media="Screen" />
+	<script type="text/javascript" src="resources/tcc_qmutils.js"></script>
+	<script type="text/javascript" src="resources/tcc_mpg.js"></script>
+  </head>
+<body>
+<div id="header">
+<h1>Add Contestant to Game</h1>
+</div>
+<form id="contestantform" action="/qmgame" method="POST">
+<input type="hidden" id="mpgameid" name="gameid"/>
+<table>
+<tr><td>Contestant Name</td><td><input type="text" name="contestantname"/></td></tr>
+<tr><td>Access Code</td><td><input type="text" name="qmaccesscode"/></td></tr>
+<tr><td>Contestant Email</td><td><input type="text" name="contestantemail"/></td></tr>
+<tr><td colspan="2"><a href='#' onClick='AddContestant()'>Add Contestant</a></td></tr>
+</table>
+</form>
+<div id="response"></div>
+<p><a href=# onClick='window.close()'>Close this window</a></p>
+</body>
+</html>
