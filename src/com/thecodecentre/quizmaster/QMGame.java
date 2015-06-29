@@ -31,8 +31,10 @@ public class QMGame {
     private int gameStatus;		// 0 means not yet started other wise question no.
 	@Persistent					// if more than numquestions then game has finished
     private QMQuestion.QCat category;
-	@Persistent					// if more than numquestions then game has finished
+	@Persistent	
     private QMQuestion.QSubCat subCategory;
+	@Persistent	
+    private QMQuestion.QDiff difficulty;
 	@Persistent
     private QMethod questionMethod;
 	@Persistent
@@ -47,12 +49,13 @@ public class QMGame {
 		AUTO, MANUAL
 	}
 		
-	public QMGame(long qmid, String name, String cat, String subcat)
+	public QMGame(long qmid, String name, String cat, String subcat, String diff)
 	{
 		this.QMId = qmid;
 		this.gameName = name;
 		this.category = QMQuestion.getCatFromString(cat);
 		this.subCategory = QMQuestion.getSubCatFromString(subcat);
+		this.difficulty = QMQuestion.getDiffFromString(diff);
 		this.questionMethod = QMethod.MANUAL;
 		this.numQuestions = 0;
 		this.timeLimit = 0;	// seconds default
@@ -208,11 +211,11 @@ public class QMGame {
 	
 	public void setQuestionsForGame(int numreq) throws TCCException
 	{
-		int randomNum, qno;
+		int randomNum, qno, protect = 0;
 		
 		CatList cl = CatList.getCatList(this.category);
 		SubCatList scl = cl.getSubCatList(this.subCategory);
-		int numCat = scl.getNumQuestions();
+		int numCat = scl.getNumQuestions(this.difficulty);
 		if(numreq > numCat || numCat == 0)		// required is more than what is available
 		{
 //			Log.info("Num required: "+numreq+" available only "+numCat);
@@ -222,9 +225,10 @@ public class QMGame {
 		Random rand = new Random();
 		questionList.clear();
 		for(int c = 0; c < numreq; c++)
-		{			
+		{		
+			protect++;
 			randomNum = rand.nextInt(numCat);
-			qno = scl.getQuestion(randomNum);
+			qno = scl.getQuestion(randomNum, this.difficulty);
 			if(questionList.contains(qno))
 			{
 				c--;	// go back as this q will be ignored
@@ -232,6 +236,11 @@ public class QMGame {
 				continue;
 			}
 			questionList.add(qno);	// create game question list
+			if(protect > 100)	// protection against loop going on forever
+			{
+				Log.info("Warning: Question loop exceeded");
+				break;
+			}
 		}
 		this.numQuestions = numreq;	// set the correct number of questions
 	}

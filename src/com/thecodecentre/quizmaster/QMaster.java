@@ -123,6 +123,11 @@ public class QMaster {
 		return this.lastIPAddr;	
 	}
 	
+	public Date getLastLogin()
+	{
+		return(this.lastLogin);
+	}
+	
 	public void setLastLogin()
 	{
 //		this.lastLogin = new Date().getTime();	// converts to unix timestamp (millis since 1970)

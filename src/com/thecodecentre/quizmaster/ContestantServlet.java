@@ -81,17 +81,7 @@ public class ContestantServlet extends HttpServlet
 				try
 				{
 					String action = p[1];
-					if(action.equals("authenticate"))
-					{
-						Log.info("authentication request");
-				        String appId = req.getParameter("app_id");
-				        QMApp qma = MPGMethods.checkValidAppId(appId);			
-						qmc = checkContestantBasicAuthentication(qma, req);
-						TCCToken at = new TCCToken(qma.getAppId(), qmc.getContestantId(), qma.getAppSecret());
-						AuthTokenJsonMsg jmsg = new AuthTokenJsonMsg(at);
-						jsonrsp = gson.toJson(jmsg);
-					}
-					else if(action.equals("question"))
+					if(action.equals("question"))
 					{
 						qmc = checkContestantAuthToken(req);
 						Question qu = MPGMethods.GetQuestion(qmc.getGameId());
@@ -274,31 +264,6 @@ public class ContestantServlet extends HttpServlet
 			jmsg = new SuccessJsonMsg("Success","Your answer has been registered");
 		}
 		return jmsg;
-	}
-
-	/*
-	 * check that HTTP Basic authentication details for contestant
-	 */
-	public static QMContestant checkContestantBasicAuthentication(QMApp qma, HttpServletRequest req) throws TCCException 
-	{
-        final String authorisation = req.getHeader("Authorization");
-
-        if (authorisation != null && authorisation.startsWith("Basic"))
-        {
-            // Authorization: Basic base64credentials
-            String base64Credentials = authorisation.substring("Basic".length()).trim();
-            byte[] credentials = DatatypeConverter.parseBase64Binary(base64Credentials);
-            // credentials = gamename:username:password
-            String acredentials = new String(credentials);
-            final String[] values = acredentials.split(":",3);
-            if(values[0] == null || values[1] == null || values[2] == null)	// no username or password
-            	throw new TCCException("Credentials not provided");
-            QMContestant qmc = MPGMethods.checkContestantCredentials(values[0],values[1],values[2]);
-            	
-            return qmc;
-        }
-            
-    	throw new TCCException("Credentials not provided");
 	}
 
 	/*

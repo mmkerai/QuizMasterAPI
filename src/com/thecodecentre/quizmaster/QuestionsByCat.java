@@ -41,11 +41,13 @@ public class QuestionsByCat {
 	{
 		QSubCat subCategory;
 		int numQuestions;
+		Difficulty difficulty;
 		
 		private QSubCategory(SubCatList scl)
 		{
 			subCategory = scl.getSubCategory();
-			numQuestions = scl.getNumQuestions();
+			numQuestions = scl.getNumAllQuestions();
+			difficulty = scl.getDiffForSubCat();
 		}
 	}
 }

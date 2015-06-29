@@ -1,5 +1,9 @@
 package com.thecodecentre.quizmaster;
 
+/*
+ * File to process all API calls to /qmgames
+ */
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;

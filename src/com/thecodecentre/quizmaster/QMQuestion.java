@@ -54,22 +54,23 @@ public class QMQuestion {
 
 	public enum QDiff	//  difficulty of questions
 	{
-		EASY, MEDIUM, HARD
+		EASY, MEDIUM, HARD, MIXED
 	}
 
 	// constructor
-	public QMQuestion(QType type, QCat cat, QSubCat scat)
+	public QMQuestion(QType type, QCat cat, QSubCat scat, QDiff difficulty)
 	{
 		this.questionId = LAST_QID++;
 		this.category = cat;
+		this.difficulty = difficulty;
 		this.setType(type);
 		this.used = 0;
 		this.correct = 0;
 		CatList cl = CatList.getCatList(cat);
 		if(cl != null)
-		{		
+		{	
 			SubCatList scl = cl.getSubCatList(scat);
-			scl.addQid(this.questionId);
+			scl.addQid(this.questionId, difficulty);
 		}
 	}
 	
@@ -240,6 +241,7 @@ public class QMQuestion {
 	
 	public static QDiff getDiffFromString(String d)
 	{
+    	if(d.equalsIgnoreCase(QDiff.MIXED.toString())) return(QDiff.MIXED);
     	if(d.equalsIgnoreCase(QDiff.MEDIUM.toString())) return(QDiff.MEDIUM);
     	if(d.equalsIgnoreCase(QDiff.HARD.toString())) return(QDiff.HARD);
 
@@ -297,12 +299,11 @@ public class QMQuestion {
 	        	
 	        	QCat category = getCatFromString(cat);
 	            QSubCat scat = getSubCatFromString(subcat);
-	            QMQuestion mpq = new QMQuestion(qtype, category, scat);
+	            QDiff difficulty = getDiffFromString(diff);
+	            QMQuestion mpq = new QMQuestion(qtype, category, scat, difficulty);
 	        	mpq.setQuestion(question);
 	        	String answer = options[0];		// first option being the correct answer
 	            mpq.setSubCategory(scat);
-	            QDiff difficulty = getDiffFromString(diff);
-	            mpq.setDifficulty(difficulty);
 	        	mpq.setAnswer(answer);
 	        	if(qtype == QType.MULTICHOICE)
 	        		mpq.setOptions(options);

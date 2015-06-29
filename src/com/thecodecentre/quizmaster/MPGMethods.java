@@ -12,11 +12,7 @@ import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.DatatypeConverter;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.thecodecentre.quizmaster.QMQuestion.QType;
 
 public class MPGMethods {
 
@@ -51,7 +47,7 @@ public class MPGMethods {
         
     }
 
-	public static QMaster GetQMasterFromId(long qmid) throws TCCException
+	public static QMaster GetQMasterFromId(Long qmid) throws TCCException
 	{
 		QMaster qm = null;
 		
@@ -61,10 +57,24 @@ public class MPGMethods {
 		}
 		catch (Exception e)
 		{
-			throw new TCCException("Game id does not exist: "+qmid);
+			throw new TCCException("Quizmaster id does not exist: "+qmid);
 		}		
 		
 		return qm;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<QMaster> GetAllQMasterFromAppId(Long appid) throws TCCException
+	{
+		List<QMaster> results = new ArrayList<QMaster>();
+		String q1 = "appId == "+appid;
+	    results = (List<QMaster>) pm.newQuery(QMaster.class, q1).execute();
+	    if (results.isEmpty())	// no matches
+		{
+			throw new TCCException("No quizmasters configured for this app id: "+appid);
+		}		
+		
+		return results;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -95,12 +105,13 @@ public class MPGMethods {
 
 	public static QMGame AddGame(QMaster qm, HttpServletRequest req) throws TCCException
 	{
-		String gName, gCategory,gSubCategory;
+		String gName, gCategory,gSubCategory, gDiff;
 		String numQuestions,timeLimit, quMethod;
 		
 		if((gName = req.getParameter("qmgname")) == null) gName = "";
 		if((gCategory = req.getParameter("qmgcat")) == null) gCategory = "";
 		if((gSubCategory = req.getParameter("qmgsubcat")) == null) gSubCategory = "";
+		if((gDiff = req.getParameter("qmgdiff")) == null) gDiff = "";
 		if((numQuestions = req.getParameter("qmgnumqu")) == null) numQuestions = "";
 		if((timeLimit = req.getParameter("qmgtimelimit")) == null) timeLimit = "";
 		if((quMethod = req.getParameter("qmgqumethod")) == null) quMethod = "";
@@ -125,7 +136,7 @@ public class MPGMethods {
 		if(game != null)
 			throw new TCCException(gName+ " already exists, try another name");
 		
-		game = new QMGame(qm.getQMId(), gname, gCategory, gSubCategory);
+		game = new QMGame(qm.getQMId(), gname, gCategory, gSubCategory, gDiff);
 		
 		if(!numQuestions.isEmpty())
 		{
@@ -425,7 +436,7 @@ public class MPGMethods {
 	public static QMApp checkValidAppId(String app_id) throws TCCException
 	{
 		QMApp qma;
-		long appid;
+		Long appid;
 		
 		try
 		{
@@ -468,6 +479,7 @@ public class MPGMethods {
 	public static QMaster checkQMCredentials(String name, String password) throws TCCException
 	{
 		List<QMaster> results = new ArrayList<QMaster>();
+		name = name.toLowerCase();			// name is case insensitive
 		String q1 = "QMName == '"+name+"'";
 	    results = (List<QMaster>) pm.newQuery(QMaster.class, q1).execute();
 	    if(results.isEmpty())		// no matching name

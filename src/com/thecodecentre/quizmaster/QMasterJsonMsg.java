@@ -1,17 +1,23 @@
 package com.thecodecentre.quizmaster;
 
+import java.util.Date;
+
 public class QMasterJsonMsg 
 {	
-	private long QuizMasterId;
-	private long ApplicationId;
-	private String QuizMasterName;
-	private String QuizMasterEmail;
+	private long quizmasterId;
+	private long applicationId;
+	private String quizmasterName;
+	private String quizmasterEmail;
+    private String lastIPAddr;	// last IP address used
+    private Date lastLogin;	
 
-	public QMasterJsonMsg(long qmid, long appid, String qmname, String qmemail)
+	public QMasterJsonMsg(QMaster qm)
 	{
-		this.QuizMasterId = qmid;
-		this.ApplicationId = appid;
-		this.QuizMasterName = qmname;
-		this.QuizMasterEmail = qmemail;		
+		this.quizmasterId = qm.getQMId();
+		this.applicationId = qm.getAppId();
+		this.quizmasterName = qm.getQMName();
+		this.quizmasterEmail = qm.getEmail();
+		this.lastIPAddr = qm.getLastIPAddr();
+		this.lastLogin = qm.getLastLogin();
 	}
 }
