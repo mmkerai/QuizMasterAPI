@@ -330,7 +330,7 @@ public class MPGMethods {
 		
 		try 
 		{
-			mpg = MPGMethods.GetGameFromId(gameid);
+			mpg = GetGameFromId(gameid);
 		} 
 		catch (TCCException e) 
 		{

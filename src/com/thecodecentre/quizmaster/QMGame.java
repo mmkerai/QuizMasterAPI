@@ -244,5 +244,25 @@ public class QMGame {
 		}
 		this.numQuestions = numreq;	// set the correct number of questions
 	}
+
+	/*
+	 * Replace one question in list with another
+	 */
+	public void replaceQuestion(int questionNo, int newqid) 
+	{
+		this.questionList.set(questionNo-1, newqid);
+	}
+
+	public void deleteQuestion(int questionNo) 
+	{
+		this.questionList.remove(questionNo-1);
+		this.numQuestions = this.questionList.size();
+	}
+
+	public void addNewQuestion(int newqid) 
+	{
+		this.questionList.add(newqid);
+		this.numQuestions = this.questionList.size();
+	}
 	
 }

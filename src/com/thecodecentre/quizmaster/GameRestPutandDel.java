@@ -45,7 +45,7 @@ public class GameRestPutandDel {
 				game = UpdateGame(game, req);
 				jsonrsp = gson.toJson(game);
 			}
-			else if(p.length == 3)	// There is a control action after gameid 
+			else if(p.length == 3 || p.length == 4)	// There is a control action after gameid 
 			{					// i.e. /qmgame/<game id>/action
 				String action = p[2];
 				if(action.equals("start"))
@@ -79,16 +79,34 @@ public class GameRestPutandDel {
 					ScoresJsonMsg jmsg = new ScoresJsonMsg(game);
 					jsonrsp = gson.toJson(jmsg);					
 				}
+				else if(action.equals("questions"))	// i.e. /qmgame/<game id>/questions/qno
+				{
+					Log.info("Replace question "+gameid);
+					String qidstr;
+					if(p.length == 4)	// if a question number i.e. /qmgames/<game id>/questions/ques no
+					{
+						int questionNo = Integer.parseInt(p[3]);
+						if(questionNo == 0 || questionNo > game.getNumQuestions())
+							throw new TCCException("Question number invalid for this game");
+						// check put data contains valid question id
+						if((qidstr = req.getParameter("questionid")) == null)
+							throw new TCCException("Request Invalid, question id missing");
+						int newqid = Integer.parseInt(qidstr);
+						QMQuestion qmq = QMQuestion.getQMQuestionFromId(newqid);
+						game.replaceQuestion(questionNo, newqid);
+						jsonrsp = gson.toJson(qmq);
+					}
+					else
+						throw new TCCException("This request is invalid");						
+				}
 				else
 				{
-					ErrorJsonMsg error = new ErrorJsonMsg("API Error", "This request is invalid");
-					jsonrsp = gson.toJson(error);												
+					throw new TCCException("This request is invalid");												
 				}
 			}
 			else
 			{
-				ErrorJsonMsg error = new ErrorJsonMsg("API Error", "This request is invalid");
-				jsonrsp = gson.toJson(error);												
+				throw new TCCException("This request is invalid");												
 			}
 		}
 		else
@@ -116,9 +134,29 @@ public class GameRestPutandDel {
 			{
 				gameid = Long.parseLong(p[1]);
 				game = MPGMethods.GetGameFromId(gameid);
-				DeleteGame(game);
-				SuccessJsonMsg jmsg = new SuccessJsonMsg("Success","Game deleted");
-				jsonrsp = gson.toJson(jmsg);
+				if(p.length == 2)	// just the gameid i.e. /qmgame/<game id>
+				{
+					DeleteGame(game);
+					SuccessJsonMsg jmsg = new SuccessJsonMsg("Success","Game deleted");
+					jsonrsp = gson.toJson(jmsg);
+				}
+				else if(p.length == 4)	//  /qmgame/<game id>/questions/qno
+				{
+					if(p[2].equals("questions"))	// i.e. /qmgame/<game id>/questions/qno
+					{
+						int questionNo = Integer.parseInt(p[3]);
+						if(questionNo == 0 || questionNo > game.getNumQuestions())
+							throw new TCCException("Question number invalid for this game");
+						Log.info("Delete question "+questionNo+" from game "+gameid);
+						game.deleteQuestion(questionNo);
+						SuccessJsonMsg jmsg = new SuccessJsonMsg("Success","Question deleted from game");
+						jsonrsp = gson.toJson(jmsg);
+					}
+					else
+						throw new TCCException("This request is invalid");		
+				}
+				else
+					throw new TCCException("This request is invalid");		
 			}
 			catch (NumberFormatException nfe)
 			{

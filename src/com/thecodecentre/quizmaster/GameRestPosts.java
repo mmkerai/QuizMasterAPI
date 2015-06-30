@@ -1,7 +1,6 @@
 package com.thecodecentre.quizmaster;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +9,8 @@ import com.google.gson.GsonBuilder;
 
 public class GameRestPosts {
 	
+  	private static final Logger Log = Logger.getLogger(GameRestPosts.class.getName());
+
 	public static String RestPostsFromPath(QMaster qm, HttpServletRequest req) throws TCCException
 	{
 		String jsonrsp = null;
@@ -38,13 +39,25 @@ public class GameRestPosts {
 			{
 				// TODO
 			}
-			else if(p.length == 3)	// next param
+			else if(p.length == 3 || p.length == 4)	// next param
 			{
 			
 				if(p[2].equals("contestant"))	// /qmgame/nnnnnnn/contestant
 				{
 					QMContestant con = MPGMethods.AddContestant(game, req);
 					jsonrsp = gson.toJson(con);	
+				}
+				else if(p[2].equals("questions"))	// /qmgame/nnnnnnn/questions
+				{
+					Log.info("Add question to game "+gameid);
+					String qidstr;
+					// check put data contains valid question id
+					if((qidstr = req.getParameter("questionid")) == null)
+						throw new TCCException("Request Invalid, question id missing");
+					int newqid = Integer.parseInt(qidstr);
+					QMQuestion qmq = QMQuestion.getQMQuestionFromId(newqid);
+					game.addNewQuestion(newqid);
+					jsonrsp = gson.toJson(qmq);
 				}
 				else
 				{
